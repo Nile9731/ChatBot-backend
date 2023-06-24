@@ -5,7 +5,7 @@ public class Client {
     public static void main(String [] args) {
         try {
             // Create a socket and connect to the server
-            Socket socket = new Socket("localhost", 5000);
+            Socket socket = new Socket();
             System.out.println("Connected to server");
 
             // Create input and output streams for the socket
