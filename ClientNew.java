@@ -10,6 +10,9 @@ public class ClientNew {
         String serverIP;
         int port;
         try {
+
+//added new comment just to verify
+
             Properties props= PropertyUtility.read("project.properties");
             serverIP= props.getProperty("serverIP");
             port = Integer.parseInt(props.getProperty("port"));
