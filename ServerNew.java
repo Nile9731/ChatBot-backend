@@ -6,6 +6,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import java.util.Scanner;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 
 public class ServerNew {
@@ -64,24 +68,26 @@ public class ServerNew {
      }
 
      private String sendChatGPTRequest(String message) throws IOException {
-         String apiKey ="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" +
+         String apiKey ="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" +
                  "\n";
          String apiUrl = "https://api.openai.com/v1/chat/completions";
          String model = "gpt-3.5-turbo";
          int maxTokens = 100;
 
-         URL url = new URL(apiUrl);
-         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+         try {
+            URI uri = new URI(apiUrl);
+            URL url = uri.toURL();
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
          //opens the url connection
          connection.setRequestMethod("POST");
-         connection.setRequestProperty("Authorization", "Bearer " + "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");
+         connection.setRequestProperty("Authorization", "Bearer " + "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");
          connection.setRequestProperty("Content-Type", "application/json");
          connection.setDoOutput(true);
 
          String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"system\", \"content\": \"You are a helpful assistant.\"}, {\"role\": \"user\", \"content\": \"" + message + "\"}], \"max_tokens\": " + maxTokens + "}";
          connection.getOutputStream().write(body.getBytes());
-
-         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            // Rest of your code...
+ BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
          StringBuilder response = new StringBuilder();
          String line;
          while ((line = reader.readLine()) != null) {
@@ -91,6 +97,11 @@ public class ServerNew {
 
          return response.toString();
      }
+        } catch (URISyntaxException | MalformedURLException e) {
+            e.printStackTrace();
+}
+       
+        
 
 
 
