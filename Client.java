@@ -12,7 +12,7 @@ public class Client {
             InputStream inputStream = socket.getInputStream();
             OutputStream outputStream = socket.getOutputStream();
 
-            // Read and write data from/to the socket
+            //reading writing operation
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             PrintWriter writer = new PrintWriter(outputStream, true);
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
